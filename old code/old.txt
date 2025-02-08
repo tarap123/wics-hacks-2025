@@ -9,3 +9,24 @@ document.getElementById("group-tabs").addEventListener("click", function() {
         alert(`You have ${tabs.length} tabs open! Time to wrangle 'em up!`);
     });
 });
+
+document.getElementById("group-tabs").addEventListener("click", function() {
+    chrome.tabs.query({}, function(tabs) {
+        let tabCount = tabs.length;
+        let message = `You have ${tabCount} tabs open! Time to wrangle 'em up!`;
+        let imageUrl = "assets/wrangler_bow.png"; // Make sure this file exists
+
+        let newTab = window.open();
+        newTab.document.write(`
+            <html>
+                <head><title>Tab Wrangler</title></head>
+                <body style="text-align: center; font-family: 'Rye', serif;;">
+                    <h1>🤠 Tab Wrangling Time!</h1>
+                    <img src="${imageUrl}" alt="Tab Wrangler" width="100">
+                    <p>${message}</p>
+                </body>
+            </html>
+        `);
+    });
+});
+

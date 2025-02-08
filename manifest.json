@@ -3,7 +3,7 @@
     "name": "Saddle Up & Work",
     "version": "1.0",
     "description": "A cute western-themed productivity extension with tab management and Pomodoro focus timer!",
-    "permissions": ["tabs", "storage", "notifications", "activeTab"],
+    "permissions": ["tabs", "tabGroups", "storage", "notifications", "activeTab"],
     "background": {
       "service_worker": "background.js"
     },

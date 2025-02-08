@@ -18,27 +18,25 @@ document.addEventListener("DOMContentLoaded", function() {
                 let url = tab.url;
 
                 if (url.includes("docs.google.com") || url.includes("notion.so") || url.includes("github.com")) {
-                    categories["Work"].push(tab);
+                    categories["Work"].push(tab.id);
                 } else if (url.includes("amazon.com") || url.includes("ebay.com") || url.includes("etsy.com")) {
-                    categories["Shopping"].push(tab);
+                    categories["Shopping"].push(tab.id);
                 } else if (url.includes("youtube.com") || url.includes("netflix.com") || url.includes("hulu.com")) {
-                    categories["Entertainment"].push(tab);
+                    categories["Entertainment"].push(tab.id);
                 } else if (url.includes("facebook.com") || url.includes("twitter.com") || url.includes("instagram.com")) {
-                    categories["Social Media"].push(tab);
+                    categories["Social Media"].push(tab.id);
                 } else {
-                    categories["Other"].push(tab);
+                    categories["Other"].push(tab.id);
                 }
             });
 
-            // Create tab groups
+            // Create tab groups and set fixed colors & names
             for (let category in categories) {
                 if (categories[category].length > 0) {
-                    chrome.tabs.group({
-                        tabIds: categories[category].map(tab => tab.id)
-                    }, function(groupId) {
+                    chrome.tabs.group({ tabIds: categories[category] }, function(groupId) {
                         chrome.tabGroups.update(groupId, {
-                            title: category,
-                            color: getCategoryColor(category)
+                            title: category,  // Assigns name to the group
+                            color: getCategoryColor(category)  // Assigns a fixed color
                         });
                     });
                 }
@@ -49,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-// Assign Colors to Tab Groups
+// Assign Fixed Colors to Each Tab Group
 function getCategoryColor(category) {
     const colors = {
         "Work": "blue",
@@ -60,6 +58,3 @@ function getCategoryColor(category) {
     };
     return colors[category] || "gray";
 }
-
-
-

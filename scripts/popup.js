@@ -1,0 +1,24 @@
+document.getElementById("start-timer").addEventListener("click", function() {
+    alert("Focus session started! 🤠 Get to work, partner!");
+});
+
+document.getElementById("group-tabs").addEventListener("click", function() {
+    chrome.tabs.query({}, function(tabs) {
+        let tabCount = tabs.length;
+        let message = `You have ${tabCount} tabs open! Time to wrangle 'em up!`;
+        let imageUrl = "assets/wrangler_bow.png"; // Make sure this file exists
+
+        let newTab = window.open();
+        newTab.document.write(`
+            <html>
+                <head><title>Tab Wrangler</title></head>
+                <body style="text-align: center; font-family: Arial, sans-serif;">
+                    <h1>🤠 Tab Wrangling Time!</h1>
+                    <img src="${imageUrl}" alt="Tab Wrangler" width="100">
+                    <p>${message}</p>
+                </body>
+            </html>
+        `);
+    });
+});
+

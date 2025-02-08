@@ -1,3 +1,5 @@
+popup.js
+
 document.getElementById("start-timer").addEventListener("click", function() {
     alert("Focus session started! 🤠 Get to work, partner!");
 });

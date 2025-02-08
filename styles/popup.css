@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Rye&display=swap');
+
+/* General Body Styling */
+body {
+    min-width: 400px;
+    min-height: 250px;
+    padding: 20px;
+    font-family: 'Rye', serif;;
+    background-color: #f4e1b3; /* Soft desert beige */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-image: url('assets/cowboy_background.jpg'); /* Optional background image */
+    background-size: cover;
+    background-position: center;
+    color: #4f4f4f;
+    text-align: center;
+    overflow-y: auto;
+
+}
+
+/* Title - Add a fun, cowboy-inspired touch */
+h1 {
+    font-size: 24px;
+    color: #8B4513; /* Saddle brown color */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Buttons - Adding Western-style buttons with a bit of flair */
+button {
+    background-color: #8B4513;  /* Saddle Brown */
+    color: white;
+    font-size: 16px;
+    padding: 15px 30px;
+    border: 2px solid #8B4513;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin: 10px;
+}
+
+button:hover {
+    background-color: #6a321b; /* Darker brown on hover */
+    transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+button:active {
+    transform: scale(0.95); /* Button press effect */
+}
+
+/* Status Message - Make the status message pop */
+#status-message {
+    font-size: 18px;
+    margin-top: 20px;
+    color: #7a3f0f; /* Lighter brown */
+    font-style: italic;
+    font-weight: bold;
+}
+
+/* Adding some cool animations */
+@keyframes swing {
+    0% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+    100% { transform: rotate(-10deg); }
+}
+
+button:focus {
+    animation: swing 0.5s ease;
+}
+
+/* Responsive Design - Adjustments for smaller screens */
+@media screen and (max-width: 400px) {
+    body {
+        width: 100%;
+        height: auto;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 12px 20px;
+    }
+
+    #status-message {
+        font-size: 16px;
+    }
+}

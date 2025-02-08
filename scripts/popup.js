@@ -17,6 +17,11 @@ document.addEventListener("DOMContentLoaded", function() {
             tabs.forEach(tab => {
                 let url = tab.url;
 
+                // Skip tabs with no valid URL (prevents blank tab groups)
+                if (!url || url.startsWith("chrome://") || url.startsWith("about:") || url.startsWith("edge://")) {
+                    return;
+                }
+
                 if (url.includes("docs.google.com") || url.includes("notion.so") || url.includes("github.com")) {
                     categories["Work"].push(tab.id);
                 } else if (url.includes("amazon.com") || url.includes("ebay.com") || url.includes("etsy.com")) {
@@ -30,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
 
-            // Create tab groups and set fixed colors & names
+            // Create tab groups only if there are valid tabs in the category
             for (let category in categories) {
                 if (categories[category].length > 0) {
                     chrome.tabs.group({ tabIds: categories[category] }, function(groupId) {

@@ -12,7 +12,7 @@ document.getElementById("group-tabs").addEventListener("click", function() {
         newTab.document.write(`
             <html>
                 <head><title>Tab Wrangler</title></head>
-                <body style="text-align: center; font-family: Arial, sans-serif;">
+                <body style="text-align: center; font-family: 'Rye', serif;;">
                     <h1>🤠 Tab Wrangling Time!</h1>
                     <img src="${imageUrl}" alt="Tab Wrangler" width="100">
                     <p>${message}</p>

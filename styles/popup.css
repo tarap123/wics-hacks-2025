@@ -28,6 +28,7 @@ h1 {
 
 /* Buttons - Adding Western-style buttons with a bit of flair */
 button {
+    font-family: 'Optima', sans-serif;;
     background-color: #8B4513;  /* Saddle Brown */
     color: white;
     font-size: 16px;

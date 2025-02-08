@@ -1,6 +1,55 @@
-document.getElementById("start-timer").addEventListener("click", function() {
-    alert("Focus session started! 🤠 Get to work, partner!");
+document.addEventListener("DOMContentLoaded", function() {
+    let timer;
+    let timeLeft = 25 * 60; // 25 minutes in seconds
+    let isRunning = false;
+
+    const startButton = document.getElementById("start-timer");
+    const statusMessage = document.getElementById("status-message");
+
+    startButton.addEventListener("click", function() {
+        if (!isRunning) {
+            isRunning = true;
+            startButton.textContent = "Working... ⏳";
+            startTimer();
+        }
+    });
+
+    function startTimer() {
+        timer = setInterval(() => {
+            if (timeLeft > 0) {
+                timeLeft--;
+                updateDisplay();
+            } else {
+                clearInterval(timer);
+                notifyBreak();
+                resetTimer();
+            }
+        }, 1000);
+    }
+
+    function updateDisplay() {
+        let minutes = Math.floor(timeLeft / 60);
+        let seconds = timeLeft % 60;
+        statusMessage.textContent = `Focus Time: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    }
+
+    function notifyBreak() {
+        chrome.notifications.create({
+            type: "basic",
+            iconUrl: "assets/icon48.png",
+            title: "Break Time! 🤠",
+            message: "Great job, partner! Take a 5-minute break before the next session."
+        });
+    }
+
+    function resetTimer() {
+        isRunning = false;
+        timeLeft = 25 * 60; // Reset to 25 minutes
+        startButton.textContent = "Start Focus Session";
+        statusMessage.textContent = "Focus session complete! 🎉";
+    }
 });
+
 
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("group-tabs").addEventListener("click", function() {

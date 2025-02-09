@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     return;
                 }
 
-                if (url.includes("docs.google.com") || url.includes("notion.so") || url.includes("github.com")) {
+                if (url.includes("docs.google.com") || url.includes("notion.so") || url.includes("github.com")||url.includes("utexas.instructure.com")){
                     categories["Work"].push(tab.id);
                 } else if (url.includes("amazon.com") || url.includes("ebay.com") || url.includes("etsy.com")) {
                     categories["Shopping"].push(tab.id);

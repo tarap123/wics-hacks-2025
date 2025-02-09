@@ -1,23 +1,23 @@
 document.addEventListener("DOMContentLoaded", function () {
     let timer;
-    let timeLeft = 25 * 60; // 25 minutes in seconds
+    let timeLeft = 25 * 60; //25 mins
     let isRunning = false;
-    let userPoints = 0; // Points for productivity
+    let userPoints = 0; //points
 
     const startButton = document.getElementById("start-timer");
     const statusMessage = document.getElementById("status-message");
-    const pointsDisplay = document.getElementById("points-display"); // Added for displaying points
+    const pointsDisplay = document.getElementById("points-display");
 
     const lofiMusic = document.getElementById("lofi-music");
     const volumeControl = document.getElementById("volume-control");
 
-    // Load user points from storage
+    //points
     chrome.storage.sync.get(["productivityPoints"], function (data) {
         userPoints = data.productivityPoints || 0;
         pointsDisplay.textContent = `🏆 Points: ${userPoints}`;
     });
 
-    // Update volume when slider changes
+    //volume
     volumeControl.addEventListener("input", function () {
         lofiMusic.volume = volumeControl.value;
     });
@@ -65,14 +65,14 @@ document.addEventListener("DOMContentLoaded", function () {
         startButton.textContent = "Start Focus Session";
         statusMessage.textContent = "Focus session complete! 🎉";
 
-        // Award points for completing a session
+        // award points
         userPoints += 10;
         chrome.storage.sync.set({ productivityPoints: userPoints }, function () {
             pointsDisplay.textContent = `🏆 Points: ${userPoints}`;
         });
 
         lofiMusic.pause();
-        lofiMusic.currentTime = 0; // Restart music from the beginning next time
+        lofiMusic.currentTime = 0; 
     }
 
     // "Wrangle My Tabs" Button - Categorizing Tabs
@@ -86,11 +86,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Other": []
             };
 
-            // URL Matching for Categorization
+            
             tabs.forEach(tab => {
                 let url = tab.url;
 
-                // Skip invalid URLs (prevents blank tab groups)
+               
                 if (!url || url.startsWith("chrome://") || url.startsWith("about:") || url.startsWith("edge://")) {
                     return;
                 }
@@ -108,13 +108,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
 
-            // Create tab groups only if there are valid tabs in the category
+           
             for (let category in categories) {
                 if (categories[category].length > 0) {
                     chrome.tabs.group({ tabIds: categories[category] }, function (groupId) {
                         chrome.tabGroups.update(groupId, {
-                            title: category,  // Assigns name to the group
-                            color: getCategoryColor(category)  // Assigns a fixed color
+                            title: category,  
+                            color: getCategoryColor(category) 
                         });
                     });
                 }
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Assign Fixed Colors to Each Tab Group
+    
     function getCategoryColor(category) {
         const colors = {
             "Work": "blue",

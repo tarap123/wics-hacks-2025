@@ -11,6 +11,15 @@
     <button id="start-timer">Start Focus Session</button>
     <button id="group-tabs">Wrangle My Tabs</button>
     <p id="status-message"></p>
+
+    <audio id="lofi-music" loop>
+        <source src="assets/lofi.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
+
+    <label for="volume-control">🎵 Volume:</label>
+    <input type="range" id="volume-control" min="0" max="1" step="0.05" value="0.5">
+
     <script src="scripts/popup.js"></script>
 </body>
 </html>

@@ -5,11 +5,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const startButton = document.getElementById("start-timer");
     const statusMessage = document.getElementById("status-message");
+    const lofiMusic = document.getElementById("lofi-music");
+    const volumeControl = document.getElementById("volume-control");
+
+    // Update volume when slider changes
+    volumeControl.addEventListener("input", function() {
+        lofiMusic.volume = volumeControl.value;
+    });
 
     startButton.addEventListener("click", function() {
         if (!isRunning) {
             isRunning = true;
             startButton.textContent = "Working... ⏳";
+            lofiMusic.play();
             startTimer();
         }
     });
@@ -47,11 +55,11 @@ document.addEventListener("DOMContentLoaded", function() {
         timeLeft = 25 * 60; // Reset to 25 minutes
         startButton.textContent = "Start Focus Session";
         statusMessage.textContent = "Focus session complete! 🎉";
+        lofiMusic.pause();
+        lofiMusic.currentTime = 0; // Restart music from the beginning next time
     }
-});
 
-
-document.addEventListener("DOMContentLoaded", function() {
+    // "Wrangle My Tabs" Button - Categorizing Tabs
     document.getElementById("group-tabs").addEventListener("click", function() {
         chrome.tabs.query({}, function(tabs) {
             let categories = {
@@ -66,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function() {
             tabs.forEach(tab => {
                 let url = tab.url;
 
-                // Skip tabs with no valid URL (prevents blank tab groups)
+                // Skip invalid URLs (prevents blank tab groups)
                 if (!url || url.startsWith("chrome://") || url.startsWith("about:") || url.startsWith("edge://")) {
                     return;
                 }
@@ -99,16 +107,16 @@ document.addEventListener("DOMContentLoaded", function() {
             alert("Tabs have been wrangled into categories! 🤠");
         });
     });
-});
 
-// Assign Fixed Colors to Each Tab Group
-function getCategoryColor(category) {
-    const colors = {
-        "Work": "blue",
-        "Shopping": "red",
-        "Entertainment": "yellow",
-        "Social Media": "green",
-        "Other": "gray"
-    };
-    return colors[category] || "gray";
-}
+    // Assign Fixed Colors to Each Tab Group
+    function getCategoryColor(category) {
+        const colors = {
+            "Work": "blue",
+            "Shopping": "red",
+            "Entertainment": "yellow",
+            "Social Media": "green",
+            "Other": "gray"
+        };
+        return colors[category] || "gray";
+    }
+});

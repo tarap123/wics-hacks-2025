@@ -1,19 +1,28 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     let timer;
     let timeLeft = 25 * 60; // 25 minutes in seconds
     let isRunning = false;
+    let userPoints = 0; // Points for productivity
 
     const startButton = document.getElementById("start-timer");
     const statusMessage = document.getElementById("status-message");
+    const pointsDisplay = document.getElementById("points-display"); // Added for displaying points
+
     const lofiMusic = document.getElementById("lofi-music");
     const volumeControl = document.getElementById("volume-control");
 
+    // Load user points from storage
+    chrome.storage.sync.get(["productivityPoints"], function (data) {
+        userPoints = data.productivityPoints || 0;
+        pointsDisplay.textContent = `🏆 Points: ${userPoints}`;
+    });
+
     // Update volume when slider changes
-    volumeControl.addEventListener("input", function() {
+    volumeControl.addEventListener("input", function () {
         lofiMusic.volume = volumeControl.value;
     });
 
-    startButton.addEventListener("click", function() {
+    startButton.addEventListener("click", function () {
         if (!isRunning) {
             isRunning = true;
             startButton.textContent = "Working... ⏳";
@@ -30,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
             } else {
                 clearInterval(timer);
                 notifyBreak();
-                resetTimer();
+                completeSession();
             }
         }, 1000);
     }
@@ -50,18 +59,25 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    function resetTimer() {
+    function completeSession() {
         isRunning = false;
-        timeLeft = 25 * 60; // Reset to 25 minutes
+        timeLeft = 25 * 60;
         startButton.textContent = "Start Focus Session";
         statusMessage.textContent = "Focus session complete! 🎉";
+
+        // Award points for completing a session
+        userPoints += 10;
+        chrome.storage.sync.set({ productivityPoints: userPoints }, function () {
+            pointsDisplay.textContent = `🏆 Points: ${userPoints}`;
+        });
+
         lofiMusic.pause();
         lofiMusic.currentTime = 0; // Restart music from the beginning next time
     }
 
     // "Wrangle My Tabs" Button - Categorizing Tabs
-    document.getElementById("group-tabs").addEventListener("click", function() {
-        chrome.tabs.query({}, function(tabs) {
+    document.getElementById("group-tabs").addEventListener("click", function () {
+        chrome.tabs.query({}, function (tabs) {
             let categories = {
                 "Work": [],
                 "Shopping": [],
@@ -95,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function() {
             // Create tab groups only if there are valid tabs in the category
             for (let category in categories) {
                 if (categories[category].length > 0) {
-                    chrome.tabs.group({ tabIds: categories[category] }, function(groupId) {
+                    chrome.tabs.group({ tabIds: categories[category] }, function (groupId) {
                         chrome.tabGroups.update(groupId, {
                             title: category,  // Assigns name to the group
                             color: getCategoryColor(category)  // Assigns a fixed color

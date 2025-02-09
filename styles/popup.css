@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Rye&display=swap');
 
-/* General Body Styling */
+
 body {
     min-width: 400px;
     min-height: 250px;
     padding: 20px;
     font-family: 'Rye', serif;;
-    background-color: #f4e1b3; /* Soft desert beige */
+    background-color: #f4e1b3; 
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-image: url('assets/cowboy_background.jpg'); /* Optional background image */
+    background-image: url('assets/cowboy_background.jpg'); 
     background-size: cover;
     background-position: center;
     color: #4f4f4f;
@@ -18,18 +18,18 @@ body {
 
 }
 
-/* Title - Add a fun, cowboy-inspired touch */
+
 h1 {
     font-size: 24px;
-    color: #8B4513; /* Saddle brown color */
+    color: #8B4513; 
     font-weight: bold;
     margin-bottom: 20px;
 }
 
-/* Buttons - Adding Western-style buttons with a bit of flair */
+
 button {
     font-family: 'Optima', sans-serif;;
-    background-color: #8B4513;  /* Saddle Brown */
+    background-color: #8B4513;  
     color: white;
     font-size: 16px;
     padding: 15px 30px;
@@ -41,24 +41,24 @@ button {
 }
 
 button:hover {
-    background-color: #6a321b; /* Darker brown on hover */
-    transform: scale(1.05); /* Slightly enlarge the button */
+    background-color: #6a321b; 
+    transform: scale(1.05); 
 }
 
 button:active {
-    transform: scale(0.95); /* Button press effect */
+    transform: scale(0.95); 
 }
 
-/* Status Message - Make the status message pop */
+
 #status-message {
     font-size: 18px;
     margin-top: 20px;
-    color: #7a3f0f; /* Lighter brown */
+    color: #7a3f0f;
     font-style: italic;
     font-weight: bold;
 }
 
-/* Adding some cool animations */
+
 @keyframes swing {
     0% { transform: rotate(-10deg); }
     50% { transform: rotate(10deg); }
@@ -69,7 +69,7 @@ button:focus {
     animation: swing 0.5s ease;
 }
 
-/* Responsive Design - Adjustments for smaller screens */
+
 @media screen and (max-width: 400px) {
     body {
         width: 100%;
